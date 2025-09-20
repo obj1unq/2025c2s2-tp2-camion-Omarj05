@@ -47,6 +47,10 @@ object camion {
 
 	method esPesoExcedido() { return self.pesoTotal() > 2500 }
 
+	method tieneAlgoQuePesaEntre(minimo, maximo) {
+		return cosas.any({ cosa => cosa.peso().between(minimo, maximo)})
+	}
+
 	//validaciones
 	method validarCarga(unaCosa) {
 		if (cosas.contains(unaCosa)) {

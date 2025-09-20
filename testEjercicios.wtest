@@ -134,3 +134,14 @@ test "caso de prueba : embalajeDeSeguridad y contenedorPortuario" {
     assert.equals(800, embalajeDeSeguridad.peso())
     assert.equals(7.5, embalajeDeSeguridad.nivelPeligrosidad())
 }
+
+test "caso de prueba : tieneAlgoQuePesaEntre(tanto, tanto)" {
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteDeLadrillos)
+    paqueteDeLadrillos.cantidadLadrillos(300)
+
+    assert.that(camion.tieneAlgoQuePesaEntre(5, 700))
+    assert.that(camion.tieneAlgoQuePesaEntre(5, 1000))
+    assert.notThat(camion.tieneAlgoQuePesaEntre(900, 1000))
+}
+
