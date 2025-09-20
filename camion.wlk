@@ -20,6 +20,14 @@ object camion {
 		return cosas.find({ cosa => cosa.nivelPeligrosidad() == nivel })
 	}
 
+	method cosasQueSuperenNivelDePeligrosidad(nivel) {
+		return cosas.filter({ cosa => cosa.nivelPeligrosidad() > nivel })
+	}
+
+	method cosasMasPeligrosasQue(unaCosa) {
+		return self.cosasQueSuperenNivelDePeligrosidad(unaCosa.nivelPeligrosidad())
+	}
+
 	method pesoTotal() { return self.cargaTotal() + tara }
 
 	method cargaTotal() { return cosas.sum({ cosa => cosa.peso()}) }

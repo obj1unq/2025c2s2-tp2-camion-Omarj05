@@ -88,8 +88,8 @@ Para un camión cargado con Knight Rider y la batería antiaérea cargada:
 
 - En las cosas más peligrosas de 15 sólo está la batería antiaérea.
 - En las cosas más peligrosas que Bumblebee sólo está la batería antiaérea.
-- Las cosas que superan 2 de peligrosidad son Knight Rider y la batería antiaérea descargada.
-- Las cosas más peligrosas que el paquete de ladrillos son Knight Rider y la batería antiaérea descargada.
+- Las cosas que superan 2 de peligrosidad son Knight Rider y la batería antiaérea cargada.
+- Las cosas más peligrosas que el paquete de ladrillos es únicamente Knight Rider.
 - No hay cosas más peligrosas que 200.
 - No hay nada más peligroso que los residuos radiactivos.
 

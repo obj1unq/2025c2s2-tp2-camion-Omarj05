@@ -79,3 +79,20 @@ test "caso de prueba : cosaDeNivelDePeligrosidad" {
     bateriaAntiaerea.cargarMisiles()
     assert.equals(bateriaAntiaerea, camion.cosaDeNivelDePeligrosidad(100))
 }
+
+test "caso de prueba : cosasQueSuperenNivelDePeligrosidad y cosasMasPeligrosasQue" {
+    camion.cargar(knightRider)
+    camion.cargar(bateriaAntiaerea)
+    bateriaAntiaerea.cargarMisiles()
+
+    assert.equals(#{bateriaAntiaerea}, camion.cosasQueSuperenNivelDePeligrosidad(15))
+    assert.equals(#{bateriaAntiaerea}, camion.cosasMasPeligrosasQue(bumblebee))
+
+    assert.equals(#{knightRider, bateriaAntiaerea}, camion.cosasQueSuperenNivelDePeligrosidad(2))
+
+    bateriaAntiaerea.descargarMisiles()
+    assert.equals(#{knightRider}, camion.cosasMasPeligrosasQue(paqueteDeLadrillos))
+
+    assert.equals(#{}, camion.cosasQueSuperenNivelDePeligrosidad(200))
+    assert.equals(#{}, camion.cosasMasPeligrosasQue(residuosRadioactivos))
+}
