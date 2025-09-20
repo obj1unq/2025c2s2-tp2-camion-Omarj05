@@ -1,0 +1,22 @@
+import cosas.*
+import camion.*
+
+test "caso de prueba : cargar y descargar cosas" {
+    assert.equals(#{}, camion.cosas())
+
+    camion.cargar(bumblebee)
+    assert.that(camion.cosas().contains(bumblebee))
+
+    camion.cargar(knightRider)
+    assert.that(camion.cosas().contains(knightRider))
+    assert.that(camion.cosas().contains(bumblebee))
+
+    camion.descargar(bumblebee)
+    assert.that(!camion.cosas().contains(bumblebee))
+    assert.that(camion.cosas().contains(knightRider))
+
+    assert.throwsException({ camion.cargar(knightRider) })
+
+    assert.throwsException({ camion.descargar(bumblebee) })
+}
+
