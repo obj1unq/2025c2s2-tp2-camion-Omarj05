@@ -96,3 +96,20 @@ test "caso de prueba : cosasQueSuperenNivelDePeligrosidad y cosasMasPeligrosasQu
     assert.equals(#{}, camion.cosasQueSuperenNivelDePeligrosidad(200))
     assert.equals(#{}, camion.cosasMasPeligrosasQue(residuosRadioactivos))
 }
+
+test "caso de prueba : puedeCircularEnRutaDeNivel " {
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteDeLadrillos)
+    paqueteDeLadrillos.cantidadLadrillos(300)
+
+    assert.that(camion.puedeCircularEnRutaDeNivel(20))
+
+    paqueteDeLadrillos.cantidadLadrillos(400)
+    assert.notThat(camion.puedeCircularEnRutaDeNivel(20))
+    assert.that(camion.esPesoExcedido())
+
+    paqueteDeLadrillos.cantidadLadrillos(300)
+    bumblebee.transformarEnRobot()
+    assert.notThat(camion.puedeCircularEnRutaDeNivel(20))
+    assert.equals(#{bumblebee}, camion.cosasQueSuperenNivelDePeligrosidad(20))
+}

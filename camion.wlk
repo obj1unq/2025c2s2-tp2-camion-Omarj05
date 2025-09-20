@@ -32,14 +32,22 @@ object camion {
 
 	method cargaTotal() { return cosas.sum({ cosa => cosa.peso()}) }
 
+
+	//consultas
 	method tieneAlgoQuePesa(cantidad) {
 		return cosas.any({ cosa => cosa.peso() == cantidad })
+	}
+
+	method puedeCircularEnRutaDeNivel(nivel) { 
+		return not (self.esPesoExcedido()) && 
+			self.cosasQueSuperenNivelDePeligrosidad(nivel).isEmpty()
 	}
 
 	method esTodoPesoPar() { return self.pesoTotal().even() }
 
 	method esPesoExcedido() { return self.pesoTotal() > 2500 }
 
+	//validaciones
 	method validarCarga(unaCosa) {
 		if (cosas.contains(unaCosa)) {
 			self.error("No se puede cargar porque ya está en el camión.")
