@@ -39,6 +39,8 @@ object camion {
 
 	method pesosDeLasCosasCargadas() { return cosas.map({ cosa => cosa.peso() }) }
 
+	method cantidadDeBultos() { return cosas.sum({ cosa => cosa.bultos() }) }
+
 	//consultas
 	method tieneAlgoQuePesa(cantidad) {
 		return cosas.any({ cosa => cosa.peso() == cantidad })

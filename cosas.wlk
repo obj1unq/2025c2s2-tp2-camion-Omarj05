@@ -1,16 +1,20 @@
 object knightRider {
 	method peso() { return 500 } // porque no es un atributo?
 	method nivelPeligrosidad() { return 10 }
+
+	method bultos() { return 1 }
 }
 
 object arenaAlGranel {
-	var peso = 1000
+	var peso = 100
 	
 	method peso() { return peso }
 
 	method nivelPeligrosidad() { return 1 }
 
 	method peso(cantidad) { peso = cantidad }
+
+	method bultos() { return 1 }
 }
 
 object bumblebee {
@@ -26,6 +30,8 @@ object bumblebee {
 	method transformarEnRobot() { estaTransformadoEnAuto = false }
 
 	method estaTransformadoEnAuto() { return estaTransformadoEnAuto }
+
+	method bultos() { return 2 }
 }
 
 object paqueteDeLadrillos {
@@ -36,6 +42,16 @@ object paqueteDeLadrillos {
 	method nivelPeligrosidad() { return 2 }
 
 	method cantidadLadrillos(cantidad) { cantidadLadrillos = cantidad }
+
+	method bultos() { 
+		if (cantidadLadrillos <= 100) { 
+			return 1 
+		}
+		else if (cantidadLadrillos <= 300) { 
+			return 2 
+		}
+		else { return 3 }
+	}
 }
 
 object bateriaAntiaerea {
@@ -53,6 +69,8 @@ object bateriaAntiaerea {
 
 	method cargarMisiles() { tieneMisiles = true }
 	method descargarMisiles() { tieneMisiles = false }
+
+	method bultos() { if (self.tieneMisiles()) { return 2 } else { return 1 } }
 }
 
 object residuosRadioactivos {
@@ -62,6 +80,8 @@ object residuosRadioactivos {
 	method nivelPeligrosidad() { return 200 }
 	
 	method peso(cantidad) { peso = cantidad }
+
+	method bultos() { return 1 }
 }
 
 object contenedorPortuario {
@@ -104,6 +124,8 @@ object contenedorPortuario {
 			self.error("No se puede descargar ya que no está en el contenedor.")
 		}
 	}
+
+	method bultos() { return 1 + cosas.sum({ cosa => cosa.bultos() }) }
 }
 
 object embalajeDeSeguridad {
@@ -114,4 +136,6 @@ object embalajeDeSeguridad {
 	method nivelPeligrosidad() { return cosa.nivelPeligrosidad() / 2 }
 
 	method embalar(unaCosa) { cosa = unaCosa }
+
+	method bultos() { return 2 }
 }

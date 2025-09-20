@@ -170,3 +170,57 @@ test "caso de prueba : pesosDeCosas()" {
     camion.cargar(knightRider)
     assert.equals([800, 600, 500], camion.pesosDeLasCosasCargadas())
 }
+
+
+describe "casos de prueba : bultos" {
+    test "caso de prueba 1 : 
+        camion con contenedor (con knightRider y Bumblebee), embalaje (con residuos), 
+        50 ladrillos, arena y bateria descargada" {
+        assert.that(camion.cosas().isEmpty())
+        assert.equals(0, camion.cantidadDeBultos())
+
+        camion.cargar(contenedorPortuario)
+        contenedorPortuario.cargar(bumblebee) 
+        contenedorPortuario.cargar(knightRider)
+
+        camion.cargar(embalajeDeSeguridad)
+        embalajeDeSeguridad.embalar(residuosRadioactivos)
+
+        camion.cargar(paqueteDeLadrillos)
+        paqueteDeLadrillos.cantidadLadrillos(50)
+
+        camion.cargar(arenaAlGranel)
+        camion.cargar(bateriaAntiaerea)
+
+        assert.equals(9, camion.cantidadDeBultos())
+    }
+  
+    test "caso de prueba 2 : camion con 150 ladrillos, bateria cargada y contenedor vacio" {
+        assert.that(camion.cosas().isEmpty())
+        assert.equals(0, camion.cantidadDeBultos())
+
+        camion.cargar(paqueteDeLadrillos)
+        paqueteDeLadrillos.cantidadLadrillos(150)
+
+        camion.cargar(bateriaAntiaerea)
+        bateriaAntiaerea.cargarMisiles()
+
+        camion.cargar(contenedorPortuario)
+        assert.that(contenedorPortuario.cosas().isEmpty())
+
+        assert.equals(5, camion.cantidadDeBultos())
+    }
+
+    test "caso de prueba 3 : camion con 350 ladrillos y arena" {
+        assert.that(camion.cosas().isEmpty())
+        assert.equals(0, camion.cantidadDeBultos())
+
+        camion.cargar(paqueteDeLadrillos)
+        paqueteDeLadrillos.cantidadLadrillos(350)
+        camion.cargar(arenaAlGranel)
+
+        assert.equals(4, camion.cantidadDeBultos())
+    }
+}
+
+
