@@ -113,3 +113,24 @@ test "caso de prueba : puedeCircularEnRutaDeNivel " {
     assert.notThat(camion.puedeCircularEnRutaDeNivel(20))
     assert.equals(#{bumblebee}, camion.cosasQueSuperenNivelDePeligrosidad(20))
 }
+
+test "caso de prueba : embalajeDeSeguridad y contenedorPortuario" {
+    assert.equals(100, contenedorPortuario.peso())
+    assert.equals(0, contenedorPortuario.nivelPeligrosidad())
+    
+    contenedorPortuario.cargar(knightRider)
+    contenedorPortuario.cargar(arenaAlGranel)
+    arenaAlGranel.peso(50)
+
+    assert.equals(650, contenedorPortuario.peso())
+    assert.equals(10, contenedorPortuario.nivelPeligrosidad())
+
+    embalajeDeSeguridad.embalar(knightRider)
+    assert.equals(500, embalajeDeSeguridad.peso())
+    assert.equals(5, embalajeDeSeguridad.nivelPeligrosidad())
+
+    embalajeDeSeguridad.embalar(bumblebee)
+    assert.that(bumblebee.estaTransformadoEnAuto())
+    assert.equals(800, embalajeDeSeguridad.peso())
+    assert.equals(7.5, embalajeDeSeguridad.nivelPeligrosidad())
+}
