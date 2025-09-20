@@ -156,3 +156,17 @@ test "caso de prueba : cosaMasPesada()" {
     paqueteDeLadrillos.cantidadLadrillos(500)
     assert.equals(paqueteDeLadrillos, camion.cosaMasPesada())
 }
+
+test "caso de prueba : pesosDeCosas()" {
+    assert.that(camion.cosas().isEmpty())
+
+    camion.cargar(bumblebee)
+    assert.equals([800], camion.pesosDeLasCosasCargadas())
+
+    camion.cargar(paqueteDeLadrillos)
+    paqueteDeLadrillos.cantidadLadrillos(300)
+    assert.equals([800, 600], camion.pesosDeLasCosasCargadas())
+
+    camion.cargar(knightRider)
+    assert.equals([800, 600, 500], camion.pesosDeLasCosasCargadas())
+}
