@@ -28,10 +28,14 @@ object camion {
 		return self.cosasQueSuperenNivelDePeligrosidad(unaCosa.nivelPeligrosidad())
 	}
 
+	method cosaMasPesada() {
+		self.validarExistenciaDeCosas()
+		return cosas.max({ cosa => cosa.peso() })
+	}
+
 	method pesoTotal() { return self.cargaTotal() + tara }
 
 	method cargaTotal() { return cosas.sum({ cosa => cosa.peso()}) }
-
 
 	//consultas
 	method tieneAlgoQuePesa(cantidad) {
@@ -61,6 +65,12 @@ object camion {
 	method validarDescarga(unaCosa) {
 		if (!cosas.contains(unaCosa)) {
 			self.error("No se puede descargar ya que no está en el camión.")
+		}
+	}
+
+	method validarExistenciaDeCosas() {
+		if (cosas.isEmpty()) {
+			self.error("No hay cosas en el camión.")
 		}
 	}
 }

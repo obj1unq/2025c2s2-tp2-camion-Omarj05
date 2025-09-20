@@ -145,3 +145,14 @@ test "caso de prueba : tieneAlgoQuePesaEntre(tanto, tanto)" {
     assert.notThat(camion.tieneAlgoQuePesaEntre(900, 1000))
 }
 
+test "caso de prueba : cosaMasPesada()" {
+    assert.throwsException({ camion.cosaMasPesada() })
+
+    camion.cargar(bumblebee)
+    camion.cargar(paqueteDeLadrillos)
+    paqueteDeLadrillos.cantidadLadrillos(300)
+    assert.equals(bumblebee, camion.cosaMasPesada())
+
+    paqueteDeLadrillos.cantidadLadrillos(500)
+    assert.equals(paqueteDeLadrillos, camion.cosaMasPesada())
+}
