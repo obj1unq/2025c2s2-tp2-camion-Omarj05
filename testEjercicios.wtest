@@ -58,3 +58,24 @@ test "caso de prueba : esPesoExcedido" {
     assert.equals(2600, camion.pesoTotal())
     assert.that(camion.esPesoExcedido())
 }
+
+test "caso de prueba : cosaDeNivelDePeligrosidad" {
+
+    camion.cargar(bumblebee)
+    assert.that(bumblebee.estaTransformadoEnAuto())
+    camion.cargar(bateriaAntiaerea)
+    assert.notThat(bateriaAntiaerea.tieneMisiles())
+    camion.cargar(residuosRadioactivos)
+
+    assert.equals(bateriaAntiaerea, camion.cosaDeNivelDePeligrosidad(0))
+    assert.equals(bumblebee, camion.cosaDeNivelDePeligrosidad(15))
+    assert.equals(residuosRadioactivos, camion.cosaDeNivelDePeligrosidad(200))
+    
+    assert.throwsException({ camion.cosaDeNivelDePeligrosidad(30) })
+
+    bumblebee.transformarEnRobot()
+    assert.equals(bumblebee, camion.cosaDeNivelDePeligrosidad(30))
+
+    bateriaAntiaerea.cargarMisiles()
+    assert.equals(bateriaAntiaerea, camion.cosaDeNivelDePeligrosidad(100))
+}

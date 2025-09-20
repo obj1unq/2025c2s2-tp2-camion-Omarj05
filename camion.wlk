@@ -16,17 +16,19 @@ object camion {
 		return unaCosa
 	}
 
-	method esTodoPesoPar() {
-		return self.pesoTotal().even()
+	method cosaDeNivelDePeligrosidad(nivel) {
+		return cosas.find({ cosa => cosa.nivelPeligrosidad() == nivel })
 	}
 
 	method pesoTotal() { return self.cargaTotal() + tara }
 
-	method cargaTotal() { return cosas.sum({ cosa => cosa.peso()})}
+	method cargaTotal() { return cosas.sum({ cosa => cosa.peso()}) }
 
 	method tieneAlgoQuePesa(cantidad) {
 		return cosas.any({ cosa => cosa.peso() == cantidad })
 	}
+
+	method esTodoPesoPar() { return self.pesoTotal().even() }
 
 	method esPesoExcedido() { return self.pesoTotal() > 2500 }
 

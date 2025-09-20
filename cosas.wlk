@@ -14,18 +14,18 @@ object arenaAlGranel {
 }
 
 object bumblebee {
-	var estaTransformado = false
+	var estaTransformadoEnAuto = true
 
 	method peso() { return 800 }
 
 	method nivelPeligrosidad() { 
-		if (self.estaTransformado()) { return 30 } else { return 15 } 
+		if (self.estaTransformadoEnAuto()) { return 15 } else { return 30 } 
 	}
 
-	method transformar() { estaTransformado = true }
-	method destransformar() { estaTransformado = false }
+	method transformarEnAuto() { estaTransformadoEnAuto = true }
+	method transformarEnRobot() { estaTransformadoEnAuto = false }
 
-	method estaTransformado() { return estaTransformado }
+	method estaTransformadoEnAuto() { return estaTransformadoEnAuto }
 }
 
 object paqueteDeLadrillos {
