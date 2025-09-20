@@ -20,3 +20,15 @@ test "caso de prueba : cargar y descargar cosas" {
     assert.throwsException({ camion.descargar(bumblebee) })
 }
 
+test "caso de prueba: esTodoPesoPar" {
+    assert.that(camion.cosas().isEmpty())
+    camion.cargar(bumblebee)
+    camion.cargar(arenaAlGranel)
+    arenaAlGranel.peso(50)
+
+    assert.that(camion.esTodoPesoPar())
+
+    arenaAlGranel.peso(51)
+    assert.notThat(camion.esTodoPesoPar())
+}
+

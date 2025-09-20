@@ -15,6 +15,14 @@ object camion {
 		return unaCosa
 	}
 
+	method esTodoPesoPar() {
+		return self.pesoTotal().even()
+	}
+
+	method pesoTotal() {
+		return cosas.sum({ cosa => cosa.peso()})
+	}
+
 	method validarCarga(unaCosa) {
 		if (cosas.contains(unaCosa)) {
 			self.error("No se puede cargar porque ya está en el camión.")
@@ -27,3 +35,4 @@ object camion {
 		}
 	}
 }
+
