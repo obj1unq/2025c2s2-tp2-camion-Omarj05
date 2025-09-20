@@ -23,6 +23,10 @@ object camion {
 		return cosas.sum({ cosa => cosa.peso()})
 	}
 
+	method tieneAlgoQuePesa(cantidad) {
+		return cosas.any({ cosa => cosa.peso() == cantidad })
+	}
+
 	method validarCarga(unaCosa) {
 		if (cosas.contains(unaCosa)) {
 			self.error("No se puede cargar porque ya está en el camión.")

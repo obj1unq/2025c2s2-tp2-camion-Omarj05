@@ -32,3 +32,16 @@ test "caso de prueba: esTodoPesoPar" {
     assert.notThat(camion.esTodoPesoPar())
 }
 
+test "caso de prueba : tieneAlgoQuePesa" {
+    assert.that(camion.cosas().isEmpty())
+    camion.cargar(bumblebee)
+    camion.cargar(arenaAlGranel)
+    arenaAlGranel.peso(50)
+
+    assert.that(camion.tieneAlgoQuePesa(50))
+    assert.that(camion.tieneAlgoQuePesa(800))
+
+    assert.notThat(camion.tieneAlgoQuePesa(500))
+}
+
+
