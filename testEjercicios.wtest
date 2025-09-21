@@ -173,9 +173,7 @@ test "caso de prueba : pesosDeCosas()" {
 
 
 describe "casos de prueba : bultos" {
-    test "caso de prueba 1 : 
-        camion con contenedor (con knightRider y Bumblebee), embalaje (con residuos), 
-        50 ladrillos, arena y bateria descargada" {
+    test "caso de prueba 1 : camion con contenedor (con knightRider y Bumblebee), embalaje (con residuos), 50 ladrillos, arena y bateria descargada" {
         assert.that(camion.cosas().isEmpty())
         assert.equals(0, camion.cantidadDeBultos())
 
@@ -223,4 +221,50 @@ describe "casos de prueba : bultos" {
     }
 }
 
+describe "casos de prueba : el camion sufre un accidente" {
+    test "caso de prueba 1 : camion con contenedor (con bumblebee y knightRider), embalaje (con 30 kg de residuos), 50 arena, 100 ladrillos y bateria cargada" {
+        
+        camion.cargar(contenedorPortuario)
+        contenedorPortuario.cargar(bumblebee)
+        contenedorPortuario.cargar(knightRider)
+        assert.that(bumblebee.estaTransformadoEnAuto())
+        camion.cargar(embalajeDeSeguridad)
+        embalajeDeSeguridad.embalar(residuosRadioactivos)
+        residuosRadioactivos.peso(30)
+        camion.cargar(arenaAlGranel)
+        arenaAlGranel.peso(50)
+        camion.cargar(paqueteDeLadrillos)
+        paqueteDeLadrillos.cantidadLadrillos(100)
+        camion.cargar(bateriaAntiaerea)
+        bateriaAntiaerea.cargarMisiles()
 
+        camion.sufrirAccidente()
+
+        assert.notThat(bumblebee.estaTransformadoEnAuto())
+        assert.equals(30, residuosRadioactivos.peso())
+        assert.equals(70, arenaAlGranel.peso())
+        assert.equals(88, paqueteDeLadrillos.cantidadLadrillos())
+        assert.notThat(bateriaAntiaerea.tieneMisiles())
+    }
+
+    test "caso de prueba 2 : camion con bumblebee (en modo robot), 30 kg de residuos, 10 ladrillos y bateria descargada" {
+        
+        camion.cargar(bumblebee)
+        bumblebee.transformarEnRobot()
+        camion.cargar(residuosRadioactivos)
+        residuosRadioactivos.peso(30)
+        camion.cargar(paqueteDeLadrillos)
+        paqueteDeLadrillos.cantidadLadrillos(10)
+        camion.cargar(bateriaAntiaerea)
+        assert.notThat(bateriaAntiaerea.tieneMisiles())
+
+        camion.sufrirAccidente()
+
+        assert.that(bumblebee.estaTransformadoEnAuto())
+        assert.equals(45, residuosRadioactivos.peso())
+        assert.equals(0, paqueteDeLadrillos.cantidadLadrillos())
+        assert.notThat(bateriaAntiaerea.tieneMisiles())
+    }
+
+    
+}

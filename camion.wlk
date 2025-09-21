@@ -16,6 +16,10 @@ object camion {
 		return unaCosa
 	}
 
+	method sufrirAccidente() {
+		cosas.forEach({ cosa => cosa.sufrirAccidente()})
+	}
+
 	method cosaDeNivelDePeligrosidad(nivel) {
 		return cosas.find({ cosa => cosa.nivelPeligrosidad() == nivel })
 	}

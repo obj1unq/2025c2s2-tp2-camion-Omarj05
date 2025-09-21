@@ -3,6 +3,8 @@ object knightRider {
 	method nivelPeligrosidad() { return 10 }
 
 	method bultos() { return 1 }
+
+	method sufrirAccidente() { /* no hace nada */ }
 }
 
 object arenaAlGranel {
@@ -15,6 +17,8 @@ object arenaAlGranel {
 	method peso(cantidad) { peso = cantidad }
 
 	method bultos() { return 1 }
+
+	method sufrirAccidente() { peso = peso + 20 }
 }
 
 object bumblebee {
@@ -32,6 +36,13 @@ object bumblebee {
 	method estaTransformadoEnAuto() { return estaTransformadoEnAuto }
 
 	method bultos() { return 2 }
+
+	method sufrirAccidente() { 
+		if (self.estaTransformadoEnAuto()) { 
+			self.transformarEnRobot()
+		} 
+		else { self.transformarEnAuto() }
+	}
 }
 
 object paqueteDeLadrillos {
@@ -42,6 +53,7 @@ object paqueteDeLadrillos {
 	method nivelPeligrosidad() { return 2 }
 
 	method cantidadLadrillos(cantidad) { cantidadLadrillos = cantidad }
+	method cantidadLadrillos() { return cantidadLadrillos } // para test
 
 	method bultos() { 
 		if (cantidadLadrillos <= 100) { 
@@ -51,6 +63,13 @@ object paqueteDeLadrillos {
 			return 2 
 		}
 		else { return 3 }
+	}
+
+	method sufrirAccidente() { 
+		if (cantidadLadrillos >= 12) { 
+			cantidadLadrillos = cantidadLadrillos - 12
+		} 
+		else {  cantidadLadrillos = 0 }
 	}
 }
 
@@ -71,6 +90,8 @@ object bateriaAntiaerea {
 	method descargarMisiles() { tieneMisiles = false }
 
 	method bultos() { if (self.tieneMisiles()) { return 2 } else { return 1 } }
+
+	method sufrirAccidente() { self.descargarMisiles() }
 }
 
 object residuosRadioactivos {
@@ -82,6 +103,8 @@ object residuosRadioactivos {
 	method peso(cantidad) { peso = cantidad }
 
 	method bultos() { return 1 }
+
+	method sufrirAccidente() { peso += 15 }
 }
 
 object contenedorPortuario {
@@ -112,6 +135,10 @@ object contenedorPortuario {
 		return cosas.max({ cosa => cosa.nivelPeligrosidad() })
 	}
 
+	method bultos() { return 1 + cosas.sum({ cosa => cosa.bultos() }) }
+
+	method sufrirAccidente() { cosas.forEach({ cosa => cosa.sufrirAccidente()}) }
+
 	//validaciones
 	method validarCarga(unaCosa) {
 		if (cosas.contains(unaCosa)) {
@@ -124,8 +151,6 @@ object contenedorPortuario {
 			self.error("No se puede descargar ya que no está en el contenedor.")
 		}
 	}
-
-	method bultos() { return 1 + cosas.sum({ cosa => cosa.bultos() }) }
 }
 
 object embalajeDeSeguridad {
@@ -138,4 +163,6 @@ object embalajeDeSeguridad {
 	method embalar(unaCosa) { cosa = unaCosa }
 
 	method bultos() { return 2 }
+
+	method sufrirAccidente() { /* nada */ }
 }
