@@ -88,8 +88,8 @@ Para un camión cargado con Knight Rider y la batería antiaérea cargada:
 
 - En las cosas más peligrosas de 15 sólo está la batería antiaérea.
 - En las cosas más peligrosas que Bumblebee sólo está la batería antiaérea.
-- Las cosas que superan 2 de peligrosidad son Knight Rider y la batería antiaérea descargada.
-- Las cosas más peligrosas que el paquete de ladrillos son Knight Rider y la batería antiaérea descargada.
+- Las cosas que superan 2 de peligrosidad son Knight Rider y la batería antiaérea cargada.
+- Las cosas más peligrosas que el paquete de ladrillos es únicamente Knight Rider.
 - No hay cosas más peligrosas que 200.
 - No hay nada más peligroso que los residuos radiactivos.
 
@@ -119,7 +119,7 @@ Saber si el camión tiene algo que pesa entre dos valores (mínimo y máximo).
 
 #### Ejemplo
 Para un camión cargado con Bumblebee y un paquete de 300 ladrillos:
-- Tiene algo que pesa entre 5 y 100.
+- Tiene algo que pesa entre 5 y 700.
 - Tiene algo que pesa entre 5 y 1000.
 - No tiene algo que pese entre 900 y 1000.
 
@@ -201,7 +201,7 @@ Suponiendo que el camión tiene:
 
 Al producirse un accidente:
 - Bumblebee queda en modo robot.
-- Residuos radiactivos quedan con 45 kg de peso.
+- Residuos radiactivos quedan con 45 kg de peso. // como los residuos estan embalados, no sufren efecto.
 - La arena queda con 70 kg.
 - El paquete de ladrillos queda con 88 ladrillos.
 - La batería antiaérea queda descargada.
