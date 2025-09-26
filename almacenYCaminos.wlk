@@ -4,7 +4,7 @@ import cosas.*
 object almacen {
     var property cosas = #{}
 
-    method almacenarTodo(_cosas) { cosas = cosas + _cosas }
+    method almacenarTodo(_cosas) { _cosas.forEach({ cosa => self.almacenar(cosa) }) }
 
     method almacenar(unaCosa) { cosas.add(unaCosa) }
 }

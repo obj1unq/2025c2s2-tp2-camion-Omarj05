@@ -63,7 +63,7 @@ test "caso de prueba : esPesoExcedido" {
 test "caso de prueba : cosaDeNivelDePeligrosidad" {
 
     camion.cargar(bumblebee)
-    assert.that(bumblebee.estaTransformadoEnAuto())
+    assert.that(bumblebee.estaTransformadoEn(bumblebeeAuto))
     camion.cargar(bateriaAntiaerea)
     assert.notThat(bateriaAntiaerea.tieneMisiles())
     camion.cargar(residuosRadioactivos)
@@ -74,7 +74,7 @@ test "caso de prueba : cosaDeNivelDePeligrosidad" {
     
     assert.throwsException({ camion.cosaDeNivelDePeligrosidad(30) })
 
-    bumblebee.transformarEnRobot()
+    bumblebee.transformarEn(bumblebeeRobot)
     assert.equals(bumblebee, camion.cosaDeNivelDePeligrosidad(30))
 
     bateriaAntiaerea.cargarMisiles()
@@ -110,7 +110,7 @@ test "caso de prueba : puedeCircularEnRutaDeNivel " {
     assert.that(camion.esPesoExcedido(2500))
 
     paqueteDeLadrillos.cantidadLadrillos(300)
-    bumblebee.transformarEnRobot()
+    bumblebee.transformarEn(bumblebeeRobot)
     assert.notThat(camion.puedeCircularEnRutaDeNivel(20))
     assert.equals(#{bumblebee}, camion.cosasQueSuperenNivelDePeligrosidad(20))
 }
@@ -131,7 +131,7 @@ test "caso de prueba : embalajeDeSeguridad y contenedorPortuario" {
     assert.equals(5, embalajeDeSeguridad.nivelPeligrosidad())
 
     embalajeDeSeguridad.embalar(bumblebee)
-    assert.that(bumblebee.estaTransformadoEnAuto())
+    assert.that(bumblebee.estaTransformadoEn(bumblebeeAuto))
     assert.equals(800, embalajeDeSeguridad.peso())
     assert.equals(7.5, embalajeDeSeguridad.nivelPeligrosidad())
 }
@@ -228,7 +228,7 @@ describe "casos de prueba : el camion sufre un accidente" {
         camion.cargar(contenedorPortuario)
         contenedorPortuario.cargar(bumblebee)
         contenedorPortuario.cargar(knightRider)
-        assert.that(bumblebee.estaTransformadoEnAuto())
+        assert.that(bumblebee.estaTransformadoEn(bumblebeeAuto))
         camion.cargar(embalajeDeSeguridad)
         embalajeDeSeguridad.embalar(residuosRadioactivos)
         residuosRadioactivos.peso(30)
@@ -241,7 +241,7 @@ describe "casos de prueba : el camion sufre un accidente" {
 
         camion.sufrirAccidente()
 
-        assert.notThat(bumblebee.estaTransformadoEnAuto())
+        assert.notThat(bumblebee.estaTransformadoEn(bumblebeeAuto))
         assert.equals(30, residuosRadioactivos.peso())
         assert.equals(70, arenaAlGranel.peso())
         assert.equals(88, paqueteDeLadrillos.cantidadLadrillos())
@@ -251,7 +251,7 @@ describe "casos de prueba : el camion sufre un accidente" {
     test "caso de prueba 2 : camion con bumblebee (en modo robot), 30 kg de residuos, 10 ladrillos y bateria descargada" {
         
         camion.cargar(bumblebee)
-        bumblebee.transformarEnRobot()
+        bumblebee.transformarEn(bumblebeeRobot)
         camion.cargar(residuosRadioactivos)
         residuosRadioactivos.peso(30)
         camion.cargar(paqueteDeLadrillos)
@@ -261,7 +261,7 @@ describe "casos de prueba : el camion sufre un accidente" {
 
         camion.sufrirAccidente()
 
-        assert.that(bumblebee.estaTransformadoEnAuto())
+        assert.that(bumblebee.estaTransformadoEn(bumblebeeAuto))
         assert.equals(45, residuosRadioactivos.peso())
         assert.equals(0, paqueteDeLadrillos.cantidadLadrillos())
         assert.notThat(bateriaAntiaerea.tieneMisiles())
@@ -290,7 +290,7 @@ describe "casos de prueba : almacen y caminos" {
     }
 
     test "caso de prueba 2 : ruta 9 fallido por peligrosidad" {
-        bumblebee.transformarEnRobot()
+        bumblebee.transformarEn(bumblebeeRobot)
 
         assert.notThat(camion.esPesoExcedido(2500))
         assert.notThat(camion.cosasQueSuperenNivelDePeligrosidad(20).isEmpty())

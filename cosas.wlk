@@ -22,26 +22,31 @@ object arenaAlGranel {
 }
 
 object bumblebee {
-	var estaTransformadoEnAuto = true
+	var transformacion = bumblebeeAuto
 
 	method peso() { return 800 }
 
 	method nivelPeligrosidad() { 
-		if (self.estaTransformadoEnAuto()) { return 15 } else { return 30 } 
+		if (self.estaTransformadoEn(bumblebeeAuto)) { return 15 } else { return 30 } 
 	}
 
-	method transformarEnAuto() { estaTransformadoEnAuto = true }
-	method transformarEnRobot() { estaTransformadoEnAuto = false }
+	method transformarEn(_transformacion) {
+		transformacion = _transformacion
+	}
 
-	method estaTransformadoEnAuto() { return estaTransformadoEnAuto }
+	method transformacion() { return transformacion }
 
 	method bultos() { return 2 }
 
 	method sufrirAccidente() { 
-		if (self.estaTransformadoEnAuto()) { 
-			self.transformarEnRobot()
+		if (self.estaTransformadoEn(bumblebeeAuto)) { 
+			self.transformarEn(bumblebeeRobot)
 		} 
-		else { self.transformarEnAuto() }
+		else { self.transformarEn(bumblebeeAuto) }
+	}
+	
+	method estaTransformadoEn(transformacionEsperada) {
+		return transformacion == transformacionEsperada
 	}
 }
 
@@ -127,15 +132,16 @@ object contenedorPortuario {
 	method descargar(unaCosa) {
 		self.validarDescarga(unaCosa)
 		cosas.remove(unaCosa)
-
-		return unaCosa
 	}
 
 	method cosaConMayorNivelDePeligrosidad() {
 		return cosas.max({ cosa => cosa.nivelPeligrosidad() })
 	}
 
-	method bultos() { return 1 + cosas.sum({ cosa => cosa.bultos() }) }
+	method bultos() { return self.bultoPropio() + self.cantidadBultosAlmacenados() }
+
+	method cantidadBultosAlmacenados() { return cosas.sum({ cosa => cosa.bultos() }) }
+	method bultoPropio() { return 1 }
 
 	method sufrirAccidente() { cosas.forEach({ cosa => cosa.sufrirAccidente()}) }
 
@@ -166,3 +172,8 @@ object embalajeDeSeguridad {
 
 	method sufrirAccidente() { /* nada */ }
 }
+
+//transformaciones de Bumblebee 
+
+object bumblebeeRobot {}
+object bumblebeeAuto {}

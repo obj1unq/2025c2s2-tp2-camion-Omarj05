@@ -66,7 +66,7 @@ object camion {
 			self.cosasQueSuperenNivelDePeligrosidad(nivel).isEmpty()
 	}
 
-	method esTodoPesoPar() { return self.pesoTotal().even() }
+	method esTodoPesoPar() { return cosas.all({ cosa => cosa.peso().even() }) }
 
 	method esPesoExcedido(limiteMaximoDePeso) { return self.pesoTotal() > limiteMaximoDePeso }
 
